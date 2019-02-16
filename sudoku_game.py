@@ -15,7 +15,7 @@ def generate_grid():
                      3, 1, 2, 6, 4, 5, 9, 7, 8,
                      6, 4, 5, 9, 7, 8, 3, 1, 2,
                      9, 7, 8, 3, 1, 2, 6, 4, 5]
-    return generated_lst    
+    return generated_lst
 
 def print_grid(lst_of_ints):
     # Print the grid to console for now, void function.
@@ -33,10 +33,31 @@ def print_grid(lst_of_ints):
     print("G | "+l[54]+" "+l[55]+" "+l[56]+" | "+l[57]+" "+l[58]+" "+l[59]+" | "+l[60]+" "+l[61]+" "+l[62]+" |")
     print("H | "+l[63]+" "+l[64]+" "+l[65]+" | "+l[66]+" "+l[67]+" "+l[68]+" | "+l[69]+" "+l[70]+" "+l[71]+" |")
     print("I | "+l[72]+" "+l[73]+" "+l[74]+" | "+l[75]+" "+l[76]+" "+l[77]+" | "+l[78]+" "+l[79]+" "+l[80]+" |")
-    print("  +-------+-------+-------+")    
+    print("  +-------+-------+-------+")
 
 def user_select_difficulty(list_selected_diff):
     # Prompt user to select difficulty, returns the corresponding integer.
+
+    # user selects difficulty, loop is there to catch invalid input
+    input_stuff = input("\nCHOOSE DIFFICULTY: Easy(E), Medium(M) or Hard(H): ")
+    while not list_selected_diff[0]:
+        # set difficulty to puzzle
+        if input_stuff == "E" or input_stuff == "e":
+            list_selected_diff[1] = 20
+            print("\n         EASY PUZZLE")
+            list_selected_diff[0] = True
+        elif input_stuff == "M" or input_stuff == "m":
+            list_selected_diff[1] = 35
+            print("\n        MEDIUM PUZZLE")
+            list_selected_diff[0] = True
+        elif input_stuff == "H" or input_stuff == "h":
+            list_selected_diff[1] = 50
+            print("\n         HARD PUZZLE")
+            list_selected_diff[0] = True
+        else:
+            print("Not a valid input.")
+            input_stuff = input("CHOOSE DIFFICULTY: Easy(E), Medium(M) or Hard(H): ")
+    return list_selected_diff
 
 
 def create_whitespaces(input_lst, dic, difficulty):
@@ -91,4 +112,3 @@ def play_game(difficulty_selected):
 
 if __name__ == '__main__':
     # Generate, select diffuclty and play.
-
