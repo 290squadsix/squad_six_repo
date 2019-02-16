@@ -36,6 +36,14 @@ def check_solve(result_string, latest_input, lst1, lst2):
 def play_game(difficulty_selected):
     # Play game. Loop through possibilities.
 
+    result = "Something may have gone wrong."
+    if difficulty_selected[0]:
+        lst_holes = create_whitespaces(lst, dict_blanks, difficulty_selected[1])
+        print_grid(lst_holes)
+        next_input = input("Enter coordinates(letter/number) or Quit(Q): ")
+        while (next_input != "S") and (next_input != "s"):
+            
+
 
 if __name__ == '__main__':
     # Generate, select diffuclty and play.
