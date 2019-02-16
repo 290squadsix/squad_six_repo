@@ -42,7 +42,25 @@ def play_game(difficulty_selected):
         print_grid(lst_holes)
         next_input = input("Enter coordinates(letter/number) or Quit(Q): ")
         while (next_input != "S") and (next_input != "s"):
-            
+            # checks if valid input
+            if (len(next_input) == 2) and (next_input[0] in "ABCDEFGHIabcdefghi") and (next_input[1] in "123456789"):
+                x_coord = int(next_input[1])
+                y_coord = helper_letter_coordinate(next_input[0])
+                index = (y_coord * 9) + x_coord - 1
+                can_modify_coord = check_can_modify_coord(dict_blanks, index)  # check if we're allowed to modify index
+                if can_modify_coord:  # change value
+                    lst_holes = check_value_in_digit(lst_holes, index)  # checks if input is 1-9
+                else:
+                    print("\nCoordinate you entered cannot be modified.\n")
+                next_input = input("Enter coordinates, Quit(Q) or Submit(S): ")
+            elif (len(next_input) == 1) and ((next_input == "Q") or (next_input == "q")):  # let user quit game
+                result = "Quit"
+                next_input = "S"
+            else:  # incorrectly formatted commands
+                print("Incorrect Coordinates/Command. Please try again.")
+                next_input = input("Coordinates have one letter A-I followed by a number 1-9.\n\n"
+                                   + "Enter coordinates, Quit(Q) or Submit(S): ")
+    check_solve(result, next_input, lst, lst_holes)  # checks if user won
 
 
 if __name__ == '__main__':
