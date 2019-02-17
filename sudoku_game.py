@@ -63,10 +63,27 @@ def user_select_difficulty(list_selected_diff):
 def create_whitespaces(input_lst, dic, difficulty):
     # Takes in list and creates difficulty amount of whitespaces, and saves them in a dictionary, returns new list.
 
+    lst_h = input_lst[:]
+    counter = 0
+    while counter < difficulty:
+        i = randint(0, 80)
+        if lst_h[i] != "_":
+            dic[i] = lst_h[i]
+            lst_h[i] = "_"
+            counter += 1
+    return lst_h
 
 def helper_letter_coordinate(s):
     # Changes coordinates into integer, return 0-80 integer.
 
+    lst_a = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
+    lst_aa = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    i = 0
+    while i < 9:
+        if (s == lst_a[i]) or (s == lst_aa[i]):
+            return i
+        else:
+            i += 1
 
 def check_can_modify_coord(dic, index1):
     # Acesses dictionary to check if coordinate selected by user is modifiable, return boolean answer.
