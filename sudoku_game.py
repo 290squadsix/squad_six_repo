@@ -73,7 +73,18 @@ def check_can_modify_coord(dic, index1):
 
 
 def check_value_in_digit(lst_to_fill, index2):
-    # Prompt user for digit they want to input at given index, check if it a digit, return the list with changes.
+    # Prompt user for digit they want to input at given index, check if it's a digit, return the list with changes.
+
+    req_value = input("Enter value (1-9): ")
+    # checks if input is 1-9
+    while (req_value not in "1 2 3 4 5 6 7 8 9") or (len(req_value) != 1):
+        print("\ninput is not a digit.\n")
+        req_value = input("Enter value (1-9): ")
+
+    if int(req_value) in [1, 2, 3, 4, 5, 6, 8, 9]:
+        lst_to_fill[index2] = int(req_value)
+        print_grid(lst_to_fill)
+    return lst_to_fill
 
 
 def check_solve(result_string, latest_input, lst1, lst2):
@@ -112,3 +123,7 @@ def play_game(difficulty_selected):
 
 if __name__ == '__main__':
     # Generate, select diffuclty and play.
+    lst = generate_grid()
+    dict_blanks = {}
+    selected_difficulty = user_select_difficulty([False, 0])
+    play_game(selected_difficulty)
