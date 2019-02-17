@@ -59,7 +59,6 @@ def user_select_difficulty(list_selected_diff):
             input_stuff = input("CHOOSE DIFFICULTY: Easy(E), Medium(M) or Hard(H): ")
     return list_selected_diff
 
-
 def create_whitespaces(input_lst, dic, difficulty):
     # Takes in list and creates difficulty amount of whitespaces, and saves them in a dictionary, returns new list.
 
@@ -72,6 +71,7 @@ def create_whitespaces(input_lst, dic, difficulty):
             lst_h[i] = "_"
             counter += 1
     return lst_h
+
 
 def helper_letter_coordinate(s):
     # Changes coordinates into integer, return 0-80 integer.
