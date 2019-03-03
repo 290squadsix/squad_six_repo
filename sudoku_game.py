@@ -87,6 +87,12 @@ def helper_letter_coordinate(s):
 
 def check_can_modify_coord(dic, index1):
     # Acesses dictionary to check if coordinate selected by user is modifiable, return boolean answer.
+    
+    bool_answer = False
+    for i in dic:
+        if index1 == i:
+            bool_answer = True
+    return bool_answer
 
 
 def check_value_in_digit(lst_to_fill, index2):
@@ -106,7 +112,13 @@ def check_value_in_digit(lst_to_fill, index2):
 
 def check_solve(result_string, latest_input, lst1, lst2):
     # Check if user has won. Print the answer.
-
+    
+    if ((latest_input == "S") or (latest_input == "s")) and (result_string != "Quit"):
+        if lst1 == lst2:
+            result_string = '\033[1m' + "YOU WON!"
+        else:
+            result_string = '\033[1m' + "YOU LOST :("
+    print("\n" + result_string)
 
 def play_game(difficulty_selected):
     # Play game. Loop through possibilities.
