@@ -8,6 +8,8 @@ class SudokuGUI:
         
         self.frame = Frame(master)
         self.currDifficulty = None
+        self.state = []
+        self.game = None
         master.title("Sudoku")
         
         # create label
@@ -45,7 +47,10 @@ class SudokuGUI:
         randomizeButton.pack()
         quitButton.pack()
         
-        leftFrame = self.generate_game(leftFrame) # helper to display game
+        num_whitespaces = self.get_num_whitespaces()
+        puzzle_pieces = self.get_puzzle_list(leftFrame, num_whitespaces) # get list of text/entry boxes with puzzle values
+        self.generate_game(leftFrame, num_whitespaces, puzzle_pieces) # method to display game
+        leftFrame = self.get_current_game() # get current status of frame
         
         return leftFrame
     
@@ -57,6 +62,15 @@ class SudokuGUI:
             return 35
         elif self.currDifficulty == "hard":
             return 50
+    
+    def get_recent_state(self):
+        ''' Return the most recent version of puzzle_pieces list created by generate_game '''
+        return self.state[-1]
+    
+    def get_current_game(self):
+        ''' Return the most current version of frame '''
+        return self.game
+                
         
     def get_puzzle_list(self, game, num_whitespaces):
         ''' Returns a list of Entry objects for empty sudoku spaces and Text objects
@@ -76,17 +90,13 @@ class SudokuGUI:
             else:
                 puzzle_pieces.append(Entry(game, selectborderwidth=2, width=2))
             counter += 1
-        
-        return puzzle_pieces
-        
+            
+        self.state.append(puzzle_pieces)        
+        return puzzle_pieces        
     
-    def generate_game(self, game):    
+    def generate_game(self, game, num_whitespaces, puzzle_pieces):    
         ''' Create the puzzle with entry boxes. '''
-        
-        num_whitespaces = self.get_num_whitespaces()
-        puzzle_pieces = self.get_puzzle_list(game, num_whitespaces) # get list of text/entry boxes with puzzle values
-
-                    
+                  
         column_counter = 0
         index_counter = 0
         for piece in puzzle_pieces: # display sudoku board in 9x9 format
@@ -122,9 +132,7 @@ class SudokuGUI:
                 column_counter += 1  
             
             index_counter += 1 
-    
-        return game
-    
+        self.game = game    
         
     def easyDifficulty(self):
         """ Create a game with easy difficulty """
@@ -148,12 +156,24 @@ class SudokuGUI:
         
         game.mainloop()
 
-    def submitPuzzle(self):
+    def submitPuzzle(self, puzzle_pieces):
+    
         return None 
     
     def clearPuzzle(self):
-        return None 
-    
+        ''' Function to clear empty spaces on a puzzle '''
+        
+        num_whitespaces = self.get_num_whitespaces()
+        counter = 0
+        puzzle_pieces = self.get_recent_state()
+        game = self.get_current_game()
+        null_entry = Entry()
+        
+        for piece in puzzle_pieces:
+            if type(null_entry) == type(piece):
+                piece.delete(0,END)
+        self.generate_game(game, num_whitespaces, puzzle_pieces)
+        
     def randomizePuzzle(self):
         return None 
 
