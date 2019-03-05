@@ -1,5 +1,6 @@
 from tkinter import *
-import sudoku_game as myGame #can use functions from sudoku_game file
+import puzzles as all_puzzles
+from random import randint
 
 class SudokuGUI:
     
@@ -8,7 +9,8 @@ class SudokuGUI:
         
         self.frame = Frame(master)
         self.currDifficulty = None
-        self.state = []
+        self.puzzle = []
+        self.puzzle_solution = all_puzzles.get_random_puzzle()
         self.game = None
         master.title("Sudoku")
         
@@ -48,7 +50,7 @@ class SudokuGUI:
         quitButton.pack()
         
         num_whitespaces = self.get_num_whitespaces()
-        puzzle_pieces = self.get_puzzle_list(leftFrame, num_whitespaces) # get list of text/entry boxes with puzzle values
+        puzzle_pieces = self.get_puzzle_list(leftFrame) # get list of text/entry boxes with puzzle values
         self.generate_game(leftFrame, num_whitespaces, puzzle_pieces) # method to display game
         leftFrame = self.get_current_game() # get current status of frame
         
@@ -56,6 +58,7 @@ class SudokuGUI:
     
     def get_num_whitespaces(self):
         ''' Return the number of whitespaces for current difficulty '''
+        
         if self.currDifficulty == "easy": # get difficulty
             return 20
         elif self.currDifficulty == "medium":
@@ -63,22 +66,36 @@ class SudokuGUI:
         elif self.currDifficulty == "hard":
             return 50
     
+    def get_lst_holes(self, num_whitespaces):
+        ''' Return a generated list of sudoku puzzle with '_' to represent empty slots '''
+        
+        num_whitespaces = self.get_num_whitespaces()
+        solved_puzzle = self.get_solved_puzzle()
+        lst_holes = self.create_whitespaces(solved_puzzle, {}, num_whitespaces)
+        
+        return lst_holes
+    
     def get_recent_state(self):
         ''' Return the most recent version of puzzle_pieces list created by generate_game '''
-        return self.state[-1]
+        return self.puzzle[-1]
     
     def get_current_game(self):
         ''' Return the most current version of frame '''
         return self.game
+    
+    def get_solved_puzzle(self):
+        ''' Return the solved puzzle '''
+        return self.puzzle_solution
                 
         
-    def get_puzzle_list(self, game, num_whitespaces):
+    def get_puzzle_list(self, game):
         ''' Returns a list of Entry objects for empty sudoku spaces and Text objects
             for filled sudoku spots '''
         
         puzzle_pieces = []
+        num_whitespaces = self.get_num_whitespaces()
         # use a sudoku_game function to generate list with whitespaces
-        lst_holes = myGame.create_whitespaces(myGame.generate_grid(), {}, num_whitespaces)
+        lst_holes = self.get_lst_holes(num_whitespaces)
         counter = 0
         while len(puzzle_pieces) != len(lst_holes):
             content = str(lst_holes[counter])
@@ -91,7 +108,7 @@ class SudokuGUI:
                 puzzle_pieces.append(Entry(game, selectborderwidth=2, width=2))
             counter += 1
             
-        self.state.append(puzzle_pieces)        
+        self.puzzle.append(puzzle_pieces)        
         return puzzle_pieces        
     
     def generate_game(self, game, num_whitespaces, puzzle_pieces):    
@@ -136,29 +153,69 @@ class SudokuGUI:
         
     def easyDifficulty(self):
         """ Create a game with easy difficulty """
+        
         self.currDifficulty = "easy"
         game = self.createFrame()
-    
         game.mainloop()
 
     
     def mediumDifficulty(self):
         ''' Create a game with medium difficulty '''
+        
         self.currDifficulty = "medium"
         game = self.createFrame()
-
         game.mainloop()
         
     def hardDifficulty(self):
         ''' Create a game with hard difficulty '''
+        
         self.currDifficulty = "hard"
         game = self.createFrame()
-        
         game.mainloop()
 
-    def submitPuzzle(self, puzzle_pieces):
+    def submitPuzzle(self):
+        ''' Display whether user has won game or the solution was incorrect. ''' 
+        
+        puzzle_pieces = self.get_recent_state()
+        game = self.get_current_game()
+        submitted_lst = None
+        
+        invalid_input = Label(game, text="Invalid input. Please try again", foreground="red")
+        correct_solution = Label(game, text="Congratulations! That is correct", foreground="green")
+        incorrect_solution = Label(game, text="Your solution is incorrect", foreground="red")
+        try:
+            submitted_puzzle = self.create_submitted_list()
+            solved_puzzle = self.get_solved_puzzle()
+            if submitted_puzzle == solved_puzzle:
+                correct_solution.grid(row=9, columnspan=9) # display correct statement
+            else:
+                incorrect_solution.grid(row=9, columnspan=9) # display incorrect statement
+        except ValueError:
+            invalid_input.grid(row=9, columnspan=9)
     
-        return None 
+    def create_submitted_list(self):
+        ''' Helper to create a list of submitted puzzle '''
+        
+        null_entry = Entry() # useless widgets for comparison
+        null_text = Text()
+        submitted_lst = []
+        temp_solution = None
+        puzzle_pieces = self.get_recent_state()
+        game = self.get_current_game()
+        
+
+        for piece in puzzle_pieces:
+            if type(piece) == type(null_text):
+                temp_solution =  int(piece.get('1.0', 'end-1c'))
+            elif type(piece) == type(null_entry):
+                temp_solution = int(piece.get())
+            else:
+                print("there was an error")
+            submitted_lst.append(temp_solution)
+
+            
+        return submitted_lst
+        
     
     def clearPuzzle(self):
         ''' Function to clear empty spaces on a puzzle '''
@@ -172,11 +229,25 @@ class SudokuGUI:
         for piece in puzzle_pieces:
             if type(null_entry) == type(piece):
                 piece.delete(0,END)
-        self.generate_game(game, num_whitespaces, puzzle_pieces)
+        self.generate_game(game, num_whitespaces, puzzle_pieces) # generate new grid with new 
         
     def randomizePuzzle(self):
         return None 
+    
+    def create_whitespaces(self, input_lst, dic, difficulty):
+    # Takes in list and creates difficulty amount of whitespaces, and saves them in a dictionary, returns new list.
 
-root = Tk()
-myInstance = SudokuGUI(root)
-root.mainloop() 
+        lst_h = input_lst[:]
+        counter = 0
+        while counter < difficulty:
+            i = randint(0, 80)
+            if lst_h[i] != "_":
+                dic[i] = lst_h[i]
+                lst_h[i] = "_"
+                counter += 1
+        return lst_h
+    
+if __name__ == '__main__':
+    root = Tk()
+    myInstance = SudokuGUI(root)
+    root.mainloop() 
