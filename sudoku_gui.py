@@ -230,9 +230,19 @@ class SudokuGUI:
             if type(null_entry) == type(piece):
                 piece.delete(0,END)
         self.generate_game(game, num_whitespaces, puzzle_pieces) # generate new grid with new 
-        
+     
     def randomizePuzzle(self):
-        return None 
+        self.clearPuzzle() # clear puzzle
+        solved_puzzle = all_puzzles.get_random_puzzle() # get all needed information
+        self.puzzle_solution = solved_puzzle # update self.puzzle_solution to new puzzle
+        num_whitespaces = self.get_num_whitespaces()
+        game = self.get_current_game()
+        
+        whitespace_list = self.create_whitespaces(solved_puzzle, {}, num_whitespaces) # re-create puzzle with different empty spaces
+        new_puzzle = self.get_puzzle_list(game)
+        
+        self.generate_game(game, num_whitespaces, new_puzzle) #
+        
     
     def create_whitespaces(self, input_lst, dic, difficulty):
     # Takes in list and creates difficulty amount of whitespaces, and saves them in a dictionary, returns new list.
