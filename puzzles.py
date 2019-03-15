@@ -99,6 +99,5 @@ def get_random_puzzle():
             lst[i] = z
         i += 1
 
-    print(lst)
     return lst
 
