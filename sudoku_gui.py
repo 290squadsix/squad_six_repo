@@ -59,7 +59,7 @@ class SudokuGUI:
     def get_num_whitespaces(self):
         ''' Return the number of whitespaces for current difficulty '''
         
-        if self.currDifficulty == "easy": # get difficulty
+        if self.currDifficulty == "easy":
             return 20
         elif self.currDifficulty == "medium":
             return 35
@@ -89,8 +89,7 @@ class SudokuGUI:
                 
         
     def get_puzzle_list(self, game):
-        ''' Returns a list of Entry objects for empty sudoku spaces and Text objects
-            for filled sudoku spots '''
+        ''' Returns a list of Entry objects for empty sudoku spaces and Text objects for filled sudoku spots '''
         
         puzzle_pieces = []
         num_whitespaces = self.get_num_whitespaces()
@@ -112,43 +111,14 @@ class SudokuGUI:
         return puzzle_pieces        
     
     def generate_game(self, game, num_whitespaces, puzzle_pieces):    
-        ''' Create the puzzle with entry boxes. '''
-                  
+        ''' Create the puzzle grid '''            
         column_counter = 0
-        index_counter = 0
-        for piece in puzzle_pieces: # display sudoku board in 9x9 format
-            if column_counter > 8:
-                column_counter = 0
-            
-            if index_counter < 9:
-                piece.grid(row=0, column=column_counter)   
-                column_counter += 1
-            elif index_counter < 18:
-                piece.grid(row=1, column=column_counter)
-                column_counter += 1
-            elif index_counter < 27:
-                piece.grid(row=2, column=column_counter)
-                column_counter += 1
-            elif index_counter < 36:
-                piece.grid(row=3, column=column_counter)
-                column_counter += 1
-            elif index_counter < 45:
-                piece.grid(row=4, column=column_counter)
-                column_counter += 1
-            elif index_counter < 54:
-                piece.grid(row=5, column=column_counter)
-                column_counter += 1
-            elif index_counter < 63:
-                piece.grid(row=6, column=column_counter)
-                column_counter += 1
-            elif index_counter < 72:
-                piece.grid(row=7, column=column_counter)
-                column_counter += 1
-            elif index_counter < 81:
-                piece.grid(row=8, column=column_counter)
-                column_counter += 1  
-            
-            index_counter += 1 
+        row_counter = 0
+        # display sudoku board in 9x9 format
+        for piece in puzzle_pieces:
+            piece.grid(row=row_counter//9, column=column_counter % 9)
+            row_counter += 1
+            column_counter += 1
         self.game = game    
         
     def easyDifficulty(self):
