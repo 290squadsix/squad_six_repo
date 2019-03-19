@@ -2,10 +2,6 @@ from tkinter import *
 import puzzles as all_puzzles
 from random import randint
 
-<<<<<<< HEAD
-=======
-
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
 class SudokuGUI:
     
     def __init__(self, master):
@@ -17,21 +13,8 @@ class SudokuGUI:
         self.puzzle_solution = all_puzzles.get_random_puzzle()
         self.game = None
         master.title("Sudoku")
-
-<<<<<<< HEAD
-        selectDifficulty = Label(root, text="Select a Difficulty")
-
-        easyButton = Button(self.frame, text="EASY", command=self.easyDifficulty)
-        mediumButton = Button(self.frame, text="MEDIUM", command=self.mediumDifficulty)
-        hardButton = Button(self.frame, text="HARD", command=self.hardDifficulty)        
-              
-        selectDifficulty.pack()
-        easyButton.pack()
-        mediumButton.pack()
-        hardButton.pack()
-        self.frame.pack()
-=======
-        selectDifficulty = Label(root, text="Select a Difficulty:", font=("Play", 20))
+        
+        selectDifficulty = Label(self.frame, text="Select a Difficulty")
 
         easyButton = Button(self.frame, text="EASY", command=self.easyDifficulty, font=("Helvetica", 18))
         mediumButton = Button(self.frame, text="MEDIUM", command=self.mediumDifficulty, font=("Helvetica", 18))
@@ -42,7 +25,6 @@ class SudokuGUI:
         mediumButton.pack(pady=(5, 5))
         hardButton.pack()
         self.frame.pack(padx=(150, 150), pady=(0, 40))
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
         
     def createFrame(self):
         ''' Create the window and layout for the game. The left frame will be the sudoku board and right frame contains the necessary buttons. '''
@@ -52,19 +34,7 @@ class SudokuGUI:
         
         rightFrame = Frame(game)
         leftFrame = Frame(game)
-<<<<<<< HEAD
-        rightFrame.pack(side=RIGHT)
-        leftFrame.pack(side=LEFT)
-        
-        submitButton = Button(rightFrame, text="SUBMIT", command=self.submitPuzzle)
-        clearButton = Button(rightFrame, text="CLEAR", command=self.clearPuzzle)
-        randomizeButton = Button(rightFrame, text="RANDOMIZE", command=self.randomizePuzzle)
-        quitButton = Button(rightFrame, text="QUIT", command=game.quit)
-        
-        submitButton.pack()
-        clearButton.pack()
-        randomizeButton.pack()
-=======
+
         rightFrame.pack(side=RIGHT, padx=(100, 100))
         leftFrame.pack(side=LEFT, pady=(80, 80), padx=(100, 20))
 
@@ -77,7 +47,6 @@ class SudokuGUI:
         submitButton.pack()
         clearButton.pack(pady=(10, 10))
         randomizeButton.pack(pady=(0, 10))
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
         quitButton.pack()
         
         num_whitespaces = self.get_num_whitespaces()
@@ -114,10 +83,7 @@ class SudokuGUI:
     
     def get_solved_puzzle(self):
         return self.puzzle_solution
-<<<<<<< HEAD
-                
-=======
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
+
         
     def get_puzzle_list(self, game):
         ''' Return a list of Entry objects (for empty sudoku spaces), and Text objects (for filled sudoku spots). '''
@@ -155,10 +121,6 @@ class SudokuGUI:
         self.currDifficulty = "easy"
         game = self.createFrame()
         game.mainloop()
-<<<<<<< HEAD
-
-=======
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
     
     def mediumDifficulty(self):
         self.currDifficulty = "medium"

@@ -1,25 +1,15 @@
-<<<<<<< HEAD
 from random import randint
-def get_random_puzzle():
-    ''' Return a random puzzle '''
-    x = randint(1,1) # set second number to number of total puzzles
-=======
 from random import *
 
 
 def get_grid():
     ''' Return a random puzzle '''
-    x = randint(1, 3)  # set second number to total number of puzzles
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
-
+    x = randint(1, 3)  
+    
     puzzle_1 =  [1, 2, 3, 4, 5, 6, 7, 8, 9,
                  4, 5, 6, 7, 8, 9, 1, 2, 3,
                  7, 8, 9, 1, 2, 3, 4, 5, 6,
-<<<<<<< HEAD
-                 
-=======
 
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
                  2, 3, 1, 5, 6, 4, 8, 9, 7,
                  5, 6, 4, 8, 9, 7, 2, 3, 1,
                  8, 9, 7, 2, 3, 1, 5, 6, 4,
@@ -27,11 +17,6 @@ def get_grid():
                  3, 1, 2, 6, 4, 5, 9, 7, 8,
                  6, 4, 5, 9, 7, 8, 3, 1, 2,
                  9, 7, 8, 3, 1, 2, 6, 4, 5]
-<<<<<<< HEAD
-    
-    if x == 1:
-        return puzzle_1
-=======
 
     puzzle_2 =  [8, 2, 7, 1, 5, 4, 3, 9, 6,
                  9, 6, 5, 3, 2, 7, 1, 4, 8,
@@ -116,5 +101,3 @@ def get_random_puzzle():
         i += 1
 
     return lst
-
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
