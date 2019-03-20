@@ -1,5 +1,4 @@
 # squad_six_repo
-=======
 ## Sudoku
 
 A fun, new remake of the classic game `Pygame` and `python`.
