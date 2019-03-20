@@ -1,5 +1,4 @@
 # squad_six_repo
-<<<<<<< HEAD
 =======
 ## Sudoku
 
@@ -62,9 +61,13 @@ $ brew install python3
 Next, enter the following:
 
 $ sudo easy_install pip
+
 $ sudo pip3 install Pillow
+
 $ pip install pyinstaller
+
 $ git clone https://github.com/290squadsix/squad_six_repo.git
+
 $ cd squad_six_repo
 
 Next, to run the game enter the following:
