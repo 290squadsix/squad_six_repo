@@ -1,6 +1,7 @@
 from tkinter import *
 import puzzles as all_puzzles
 from random import randint
+from PIL import Image, ImageTk
 
 class SudokuGUI:
     
@@ -8,6 +9,8 @@ class SudokuGUI:
         """ Create Sudoku application page to select from three difficulties (represented by buttons). """
         
         self.frame = Frame(master)
+        self.rightFrame = Frame(master)
+        
         self.currDifficulty = None
         self.puzzle = []
         self.puzzle_solution = all_puzzles.get_random_puzzle()
@@ -15,16 +18,23 @@ class SudokuGUI:
         master.title("Sudoku")
         
         selectDifficulty = Label(self.frame, text="Select a Difficulty")
+        
+        image = Image.open("start_screen.jpeg")
+        photo = ImageTk.PhotoImage(image)        
+        label = Label(self.rightFrame, image=photo)
+        label.image = photo
 
         easyButton = Button(self.frame, text="EASY", command=self.easyDifficulty, font=("Helvetica", 18))
         mediumButton = Button(self.frame, text="MEDIUM", command=self.mediumDifficulty, font=("Helvetica", 18))
         hardButton = Button(self.frame, text="HARD", command=self.hardDifficulty, font=("Helvetica", 18))
-
+        
+        label.pack()
         selectDifficulty.pack(pady=(20, 15))
         easyButton.pack()
         mediumButton.pack(pady=(5, 5))
         hardButton.pack()
-        self.frame.pack(padx=(150, 150), pady=(0, 40))
+        self.frame.pack(side=LEFT, padx=(25, 25), pady=(0, 40))
+        self.rightFrame.pack(side=RIGHT)
         
     def createFrame(self):
         ''' Create the window and layout for the game. The left frame will be the sudoku board and right frame contains the necessary buttons. '''

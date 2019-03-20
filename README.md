@@ -48,7 +48,6 @@ Press Submit to check if your answers are correct.
 | Enter Number | <kbd>1-9</kbd>       |
 ----------------------------------------------------
 ## Installation
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
 
 INSTALLATION INSTRUCTIONS:
 
@@ -56,19 +55,24 @@ For MAC OS X:
 
 Open up your terminal window and enter the following:
 
+If you don't already have python3 installed on your computer:
+
+$ brew install python3
+
+Next, enter the following:
+
 $ sudo easy_install pip
+$ sudo pip3 install Pillow
 $ pip install pyinstaller
 $ git clone https://github.com/290squadsix/squad_six_repo.git
 $ cd squad_six_repo
 
 Next, to run the game enter the following:
 
-$ python sudoku_gui.py
-<<<<<<< HEAD
-=======
+$ python3 sudoku_gui.py
+
 
 ----------------------------------------------------
 ## License
 
 You can find a copy of the license at https://github.com/290squadsix/squad_six_repo/blob/master/LICENSE
->>>>>>> cea5d4ba63cb3a7ab7f6fff7f6df946721de5f72
