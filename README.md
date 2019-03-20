@@ -1,7 +1,7 @@
 # squad_six_repo
 ## Sudoku
 
-A fun, new remake of the classic game `Pygame` and `python`.
+A fun, new remake of the classic game Sudoku through the use of `Tkinter` and `python`.
 
 ----------------------------------------------------
 ## Index
