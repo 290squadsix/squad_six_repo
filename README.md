@@ -1,9 +1,7 @@
 # squad_six_repo
-<<<<<<< HEAD
-=======
 ## Sudoku
 
-A fun, new remake of the classic game `Pygame` and `python`.
+A fun, new remake of the classic game Sudoku through the use of `Tkinter` and `python`.
 
 ----------------------------------------------------
 ## Index
@@ -62,9 +60,13 @@ $ brew install python3
 Next, enter the following:
 
 $ sudo easy_install pip
+
 $ sudo pip3 install Pillow
+
 $ pip install pyinstaller
+
 $ git clone https://github.com/290squadsix/squad_six_repo.git
+
 $ cd squad_six_repo
 
 Next, to run the game enter the following:
