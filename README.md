@@ -73,7 +73,35 @@ Next, to run the game enter the following:
 
 $ python3 sudoku_gui.py
 
+Enjoy!
 
+For WINDOWS 7 AND UP:
+
+Open your web browser and install python 3 if you haven't already done so:
+
+Link for python 3.7.2 installer (https://www.python.org/ftp/python/3.7.2/python-3.7.2-amd64.exe)
+
+Open your windows command prompt terminal
+
+Next, enter the following:
+
+$ git clone https://github.com/290squadsix/squad_six_repo.git
+
+$ cd squad_six_repo
+
+Next, to run the game enter the following:
+
+$ py -3 sudoku_gui.py
+
+If the game does not run, enter this command into the command prompt:
+
+$ pip install image
+
+then,
+
+$ py -3 sudoku_gui.py
+
+Enjoy!
 ----------------------------------------------------
 ## License
 
